@@ -1,4 +1,4 @@
-import { SlitherPlugin } from './plugins/SlitherPlugin';
+import { SlitherPlugin } from './plugins/slither/SlitherPlugin';
 
 const main = async () => {
   console.log('hello world');
@@ -7,7 +7,7 @@ const main = async () => {
 
   const output = await slitherPlugin.run('./contracts/killbilly.sol');
 
-  console.log(' >>>>> output: ', JSON.parse(output ?? ''));
+  console.log(' >>>>> output: ', JSON.stringify(JSON.parse(output ?? '')));
 };
 
 main();
