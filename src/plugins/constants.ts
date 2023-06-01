@@ -20,3 +20,10 @@ export const Scope = {
 } as const;
 
 export type ScopeType = (typeof Scope)[keyof typeof Scope];
+
+export const Detectors = {
+  SLITHER: 'slither',
+  MYTHRIL: 'mythril',
+} as const;
+
+export type DetectorsType = (typeof Detectors)[keyof typeof Detectors];

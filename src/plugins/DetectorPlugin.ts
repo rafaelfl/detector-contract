@@ -8,4 +8,5 @@ export abstract class DetectorPlugin {
   }
 
   abstract run(filename: string): Promise<{ detectorName: string; json: string } | undefined>;
+  abstract pluginName(): string;
 }

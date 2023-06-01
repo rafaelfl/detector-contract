@@ -1,16 +1,14 @@
 import { DetectorPlugin } from '../DetectorPlugin';
 import { CommandRunner } from '../runner/CommandRunner';
-import { ScopeType, Vulnerabilities } from '../constants';
+import { Detectors, ScopeType, Vulnerabilities } from '../constants';
 import { SlitherCommandOutput } from './types';
-import { ResultDetection } from '../ResultDetection';
+import { ResultDetection } from '../types/ResultDetection';
 
 const MAP_VULNERABILITY = {
   suicidal: Vulnerabilities.SELF_DESTRUCT,
 };
 
 export class SlitherPlugin extends DetectorPlugin {
-  DETECTOR_NAME = 'slither';
-
   constructor() {
     super(new CommandRunner('slither %file% --json -'));
   }
@@ -57,10 +55,14 @@ export class SlitherPlugin extends DetectorPlugin {
         }
       }
 
-      return { detectorName: this.DETECTOR_NAME, json: JSON.stringify(resOut) };
+      return { detectorName: Detectors.SLITHER, json: JSON.stringify(resOut) };
     } catch (err) {
-      // console.log(err);
-      return { detectorName: this.DETECTOR_NAME, json: `{ "success": false, "error": "${err}", "results": null }` };
+      // console.error(err);
+      return { detectorName: Detectors.SLITHER, json: `{ "success": false, "error": "${err}", "results": null }` };
     }
+  }
+
+  pluginName(): string {
+    return Detectors.SLITHER;
   }
 }

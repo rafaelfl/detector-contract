@@ -1,4 +1,4 @@
-import { ScopeType, VulnerabilityType } from './constants';
+import { ScopeType, VulnerabilityType } from '../constants';
 
 interface SourceMapping {
   start: number;
