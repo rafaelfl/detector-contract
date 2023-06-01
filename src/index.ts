@@ -1,3 +1,5 @@
+import { DetectorScheduler } from './plugins/scheduler/DetectorScheduler';
+import { SimplePluginPolicy } from './plugins/scheduler/policies/SimplePluginPolicy';
 import { SlitherPlugin } from './plugins/slither/SlitherPlugin';
 
 const main = async () => {
@@ -5,9 +7,16 @@ const main = async () => {
 
   const slitherPlugin = new SlitherPlugin();
 
-  const output = await slitherPlugin.run('./contracts/killbilly.sol');
+  const pluginsList = [slitherPlugin];
 
-  console.log(' >>>>> output: ', JSON.stringify(JSON.parse(output ?? '')));
+  const detectorScheduler = new DetectorScheduler(new SimplePluginPolicy(pluginsList));
+
+  const result = await detectorScheduler.execute('./contracts/killbilly.sol');
+
+  for (const res of result) {
+    console.log(` >>>>> detector: ${res.detectorName}`);
+    console.log(` >>>>> result: ${res.json}`);
+  }
 };
 
 main();

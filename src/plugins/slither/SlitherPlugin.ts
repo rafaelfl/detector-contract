@@ -9,11 +9,13 @@ const MAP_VULNERABILITY = {
 };
 
 export class SlitherPlugin extends DetectorPlugin {
+  DETECTOR_NAME = 'slither';
+
   constructor() {
     super(new CommandRunner('slither %file% --json -'));
   }
 
-  async run(filename: string): Promise<string | undefined> {
+  async run(filename: string): Promise<{ detectorName: string; json: string } | undefined> {
     try {
       const output = await this.runner.run(filename);
 
@@ -22,7 +24,6 @@ export class SlitherPlugin extends DetectorPlugin {
       }
 
       // TODO: need to format the JSON following a standard output format
-
       const slitherObj: SlitherCommandOutput = JSON.parse(output);
 
       if (!slitherObj.success) {
@@ -56,10 +57,10 @@ export class SlitherPlugin extends DetectorPlugin {
         }
       }
 
-      return JSON.stringify(resOut);
+      return { detectorName: this.DETECTOR_NAME, json: JSON.stringify(resOut) };
     } catch (err) {
-      console.log(err);
-      return `{ "success": false, "error": "${err}", "results": null }`;
+      // console.log(err);
+      return { detectorName: this.DETECTOR_NAME, json: `{ "success": false, "error": "${err}", "results": null }` };
     }
   }
 }

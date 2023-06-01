@@ -7,5 +7,5 @@ export abstract class DetectorPlugin {
     this.runner = runner;
   }
 
-  abstract run(filename: string): Promise<string | void>;
+  abstract run(filename: string): Promise<{ detectorName: string; json: string } | undefined>;
 }
