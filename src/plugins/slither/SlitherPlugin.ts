@@ -1,6 +1,6 @@
 import { DetectorPlugin } from '../DetectorPlugin';
 import { CommandRunner } from '../runner/CommandRunner';
-import { Detectors, ScopeType, Vulnerabilities } from '../constants';
+import { Detectors, Vulnerabilities } from '../constants';
 import { SlitherCommandOutput } from './types';
 import { ResultDetection } from '../types/ResultDetection';
 
@@ -46,11 +46,15 @@ export class SlitherPlugin extends DetectorPlugin {
 
         for (const e of elements) {
           resOut.results.push({
+            vulnerabilityType: vulnerabilityFound,
             name: e.name,
             description: d.description,
-            scope: e.type as ScopeType,
-            sourceMapping: JSON.parse(JSON.stringify(e.source_mapping)),
-            vulnerabilityType: vulnerabilityFound,
+            lineNo: e?.source_mapping?.lines?.[0] ?? 0,
+            sourceFile: e?.source_mapping?.filename_relative ?? '',
+            sourceMap: {
+              start: e?.source_mapping?.start ?? 0,
+              length: e?.source_mapping?.length ?? 0,
+            },
           });
         }
       }

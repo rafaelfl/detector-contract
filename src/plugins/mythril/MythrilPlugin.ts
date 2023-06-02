@@ -1,17 +1,17 @@
 import { DetectorPlugin } from '../DetectorPlugin';
 import { CommandRunner } from '../runner/CommandRunner';
-import { Detectors, ScopeType, Vulnerabilities } from '../constants';
+import { Detectors, Vulnerabilities } from '../constants';
 
-import { SlitherCommandOutput } from '../slither/types';
+import { MythrilCommandOutput } from './types';
 import { ResultDetection } from '../types/ResultDetection';
 
-// const MAP_VULNERABILITY = {
-//   suicidal: Vulnerabilities.SELF_DESTRUCT,
-// };
+const MAP_VULNERABILITY = {
+  '106': Vulnerabilities.SELF_DESTRUCT,
+};
 
 export class MythrilPlugin extends DetectorPlugin {
   constructor() {
-    super(new CommandRunner('myth a %file% -t 3'));
+    super(new CommandRunner('myth a %file% -t 3 -o json'));
   }
 
   async run(filename: string): Promise<{ detectorName: string; json: string } | undefined> {
@@ -25,13 +25,13 @@ export class MythrilPlugin extends DetectorPlugin {
       console.log(' >>>>> output: ', output);
 
       // TODO: need to format the JSON following a standard output format
-      // const slitherObj: SlitherCommandOutput = JSON.parse(output);
+      const mythrilObj: MythrilCommandOutput = JSON.parse(output);
 
-      // if (!slitherObj.success) {
-      //   throw new Error('Error running slither');
-      // }
+      if (!mythrilObj.success) {
+        throw new Error('Error running slither');
+      }
 
-      // const detectors = slitherObj.results?.detectors ?? [];
+      const issues = mythrilObj.issues ?? [];
 
       const resOut: ResultDetection = {
         success: true,
@@ -39,24 +39,36 @@ export class MythrilPlugin extends DetectorPlugin {
         results: [],
       };
 
-      // for (const d of detectors) {
-      //   const elements = d.elements;
+      for (const issue of issues) {
+        const vulnerabilityFound = MAP_VULNERABILITY[issue['swc-id']];
+        if (!vulnerabilityFound) {
+          continue;
+        }
 
-      //   const vulnerabilityFound = MAP_VULNERABILITY[d.check];
-      //   if (!vulnerabilityFound) {
-      //     continue;
-      //   }
+        const sourceMap = issue.sourceMap;
 
-      //   for (const e of elements) {
-      //     resOut.results.push({
-      //       name: e.name,
-      //       description: d.description,
-      //       scope: e.type as ScopeType,
-      //       sourceMapping: JSON.parse(JSON.stringify(e.source_mapping)),
-      //       vulnerabilityType: vulnerabilityFound,
-      //     });
-      //   }
-      // }
+        let sourceMapStart = 0,
+          sourceMapLength = 0;
+
+        if (sourceMap && sourceMap !== ':::-') {
+          const parts = sourceMap.split(':');
+
+          sourceMapStart = parseInt(parts[0] ?? '0');
+          sourceMapLength = parseInt(parts[1] ?? '0');
+        }
+
+        resOut.results.push({
+          vulnerabilityType: vulnerabilityFound,
+          name: issue.title,
+          description: issue.description,
+          lineNo: issue.lineno,
+          sourceFile: issue.filename,
+          sourceMap: {
+            start: sourceMapStart,
+            length: sourceMapLength,
+          },
+        });
+      }
 
       return { detectorName: Detectors.MYTHRIL, json: JSON.stringify(resOut) };
     } catch (err) {
