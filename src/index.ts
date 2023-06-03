@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { FuzzySet, MembershipFunctionType } from 'javascript-fuzzylogic';
 
 import { DetectorScheduler } from './plugins/scheduler/DetectorScheduler';
 import { SimplePluginPolicy } from './plugins/scheduler/policies/SimplePluginPolicy';
@@ -25,6 +26,22 @@ const main = async () => {
     console.log(` ::::: result: ${res.json}`);
     console.log(` ---------------------------------------`);
   }
+
+  const serviceGood = new FuzzySet('good');
+
+  serviceGood.generateMembershipValues({
+    type: MembershipFunctionType.Triangular,
+    parameters: {
+      left: 20,
+      center: 60,
+      right: 80,
+      minValue: 0,
+      maxValue: 100,
+      step: 10,
+    },
+  });
+
+  console.log(serviceGood.values);
 };
 
 main();
