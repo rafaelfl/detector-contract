@@ -55,6 +55,7 @@ export class SlitherPlugin extends DetectorPlugin {
               start: e?.source_mapping?.start ?? 0,
               length: e?.source_mapping?.length ?? 0,
             },
+            severity: d.impact,
           });
         }
       }

@@ -67,6 +67,7 @@ export class MythrilPlugin extends DetectorPlugin {
             start: sourceMapStart,
             length: sourceMapLength,
           },
+          severity: issue.severity,
         });
       }
 

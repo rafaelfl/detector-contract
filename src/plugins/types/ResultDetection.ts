@@ -13,5 +13,6 @@ export interface ResultDetection {
       start: number;
       length: number;
     };
+    severity: string;
   }>;
 }
