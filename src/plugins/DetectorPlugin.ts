@@ -1,7 +1,7 @@
 import { IRunner } from './runner/IRunner';
 
 export abstract class DetectorPlugin {
-  protected runner: IRunner;
+  protected readonly runner: IRunner;
 
   constructor(runner: IRunner) {
     this.runner = runner;

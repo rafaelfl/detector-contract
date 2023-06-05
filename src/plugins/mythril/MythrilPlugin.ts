@@ -61,7 +61,7 @@ export class MythrilPlugin extends DetectorPlugin {
           vulnerabilityType: vulnerabilityFound,
           name: issue.title,
           description: issue.description,
-          lineNo: issue.lineno,
+          lines: [issue.lineno],
           sourceFile: issue.filename,
           sourceMap: {
             start: sourceMapStart,

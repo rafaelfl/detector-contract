@@ -49,7 +49,7 @@ export class SlitherPlugin extends DetectorPlugin {
             vulnerabilityType: vulnerabilityFound,
             name: e.name,
             description: d.description,
-            lineNo: e?.source_mapping?.lines?.[0] ?? 0,
+            lines: e?.source_mapping?.lines ?? [],
             sourceFile: e?.source_mapping?.filename_relative ?? '',
             sourceMap: {
               start: e?.source_mapping?.start ?? 0,

@@ -1,13 +1,13 @@
 import { VulnerabilityType } from '../constants';
 
 export interface ResultDetection {
-  success: boolean;
-  error: string | null;
-  results: Array<{
+  readonly success: boolean;
+  readonly error: string | null;
+  readonly results: Array<{
     vulnerabilityType: VulnerabilityType;
     name: string;
     description: string;
-    lineNo: number;
+    lines: Array<number>;
     sourceFile: string;
     sourceMap: {
       start: number;
