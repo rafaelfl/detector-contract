@@ -5,7 +5,7 @@ import { Error } from './exception';
 const { APP_SERVER_ERROR } = messages;
 
 interface DataObject {
-  [key: string]: string | number | boolean | DataObject | undefined | null;
+  [key: string]: string | number | boolean | DataObject | DataObject[] | undefined | null;
 }
 
 export default class ResponseHelper {
