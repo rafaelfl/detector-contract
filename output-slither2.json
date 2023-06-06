@@ -1,0 +1,343 @@
+{
+  "success": true,
+  "error": null,
+  "results": {
+    "detectors": [
+      {
+        "elements": [
+          {
+            "type": "function",
+            "name": "callnotchecked",
+            "source_mapping": {
+              "start": 159,
+              "length": 65,
+              "filename_relative": "contracts/returnvalue.sol",
+              "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+              "filename_short": "contracts/returnvalue.sol",
+              "is_dependency": false,
+              "lines": [7, 8, 9],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "ReturnValue",
+                "source_mapping": {
+                  "start": 59,
+                  "length": 297,
+                  "filename_relative": "contracts/returnvalue.sol",
+                  "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+                  "filename_short": "contracts/returnvalue.sol",
+                  "is_dependency": false,
+                  "lines": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "callnotchecked()"
+            }
+          },
+          {
+            "type": "node",
+            "name": "callee.call()",
+            "source_mapping": {
+              "start": 202,
+              "length": 15,
+              "filename_relative": "contracts/returnvalue.sol",
+              "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+              "filename_short": "contracts/returnvalue.sol",
+              "is_dependency": false,
+              "lines": [8],
+              "starting_column": 9,
+              "ending_column": 24
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "callnotchecked",
+                "source_mapping": {
+                  "start": 159,
+                  "length": 65,
+                  "filename_relative": "contracts/returnvalue.sol",
+                  "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+                  "filename_short": "contracts/returnvalue.sol",
+                  "is_dependency": false,
+                  "lines": [7, 8, 9],
+                  "starting_column": 5,
+                  "ending_column": 6
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "ReturnValue",
+                    "source_mapping": {
+                      "start": 59,
+                      "length": 297,
+                      "filename_relative": "contracts/returnvalue.sol",
+                      "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+                      "filename_short": "contracts/returnvalue.sol",
+                      "is_dependency": false,
+                      "lines": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                      "starting_column": 1,
+                      "ending_column": 2
+                    }
+                  },
+                  "signature": "callnotchecked()"
+                }
+              }
+            }
+          }
+        ],
+        "description": "ReturnValue.callnotchecked() (contracts/returnvalue.sol#7-9) ignores return value by callee.call() (contracts/returnvalue.sol#8)\n",
+        "markdown": "[ReturnValue.callnotchecked()](contracts/returnvalue.sol#L7-L9) ignores return value by [callee.call()](contracts/returnvalue.sol#L8)\n",
+        "first_markdown_element": "contracts/returnvalue.sol#L7-L9",
+        "id": "6bb72ccb05052c9b8ceb84688b342a3aedf10f770502e48f48d9786fed071608",
+        "check": "unchecked-lowlevel",
+        "impact": "Medium",
+        "confidence": "Medium"
+      },
+      {
+        "elements": [],
+        "description": "solc-0.8.20 is not recommended for deployment\n",
+        "markdown": "solc-0.8.20 is not recommended for deployment\n",
+        "first_markdown_element": "",
+        "id": "5994d07edbbb82fc2013b486f41a2fa69898d896bb171a7f7c8bd767eb5b6521",
+        "check": "solc-version",
+        "impact": "Informational",
+        "confidence": "High"
+      },
+      {
+        "elements": [
+          {
+            "type": "function",
+            "name": "callchecked",
+            "source_mapping": {
+              "start": 230,
+              "length": 124,
+              "filename_relative": "contracts/returnvalue.sol",
+              "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+              "filename_short": "contracts/returnvalue.sol",
+              "is_dependency": false,
+              "lines": [11, 12, 13, 14],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "ReturnValue",
+                "source_mapping": {
+                  "start": 59,
+                  "length": 297,
+                  "filename_relative": "contracts/returnvalue.sol",
+                  "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+                  "filename_short": "contracts/returnvalue.sol",
+                  "is_dependency": false,
+                  "lines": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "callchecked()"
+            }
+          },
+          {
+            "type": "node",
+            "name": "(success,data) = callee.call()",
+            "source_mapping": {
+              "start": 270,
+              "length": 51,
+              "filename_relative": "contracts/returnvalue.sol",
+              "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+              "filename_short": "contracts/returnvalue.sol",
+              "is_dependency": false,
+              "lines": [12],
+              "starting_column": 9,
+              "ending_column": 60
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "callchecked",
+                "source_mapping": {
+                  "start": 230,
+                  "length": 124,
+                  "filename_relative": "contracts/returnvalue.sol",
+                  "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+                  "filename_short": "contracts/returnvalue.sol",
+                  "is_dependency": false,
+                  "lines": [11, 12, 13, 14],
+                  "starting_column": 5,
+                  "ending_column": 6
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "ReturnValue",
+                    "source_mapping": {
+                      "start": 59,
+                      "length": 297,
+                      "filename_relative": "contracts/returnvalue.sol",
+                      "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+                      "filename_short": "contracts/returnvalue.sol",
+                      "is_dependency": false,
+                      "lines": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                      "starting_column": 1,
+                      "ending_column": 2
+                    }
+                  },
+                  "signature": "callchecked()"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Low level call in ReturnValue.callchecked() (contracts/returnvalue.sol#11-14):\n\t- (success,data) = callee.call() (contracts/returnvalue.sol#12)\n",
+        "markdown": "Low level call in [ReturnValue.callchecked()](contracts/returnvalue.sol#L11-L14):\n\t- [(success,data) = callee.call()](contracts/returnvalue.sol#L12)\n",
+        "first_markdown_element": "contracts/returnvalue.sol#L11-L14",
+        "id": "47861a79bd428385199bead470bcecfa523f245da602c531afd908f7507c5c9d",
+        "check": "low-level-calls",
+        "impact": "Informational",
+        "confidence": "High"
+      },
+      {
+        "elements": [
+          {
+            "type": "function",
+            "name": "callnotchecked",
+            "source_mapping": {
+              "start": 159,
+              "length": 65,
+              "filename_relative": "contracts/returnvalue.sol",
+              "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+              "filename_short": "contracts/returnvalue.sol",
+              "is_dependency": false,
+              "lines": [7, 8, 9],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "ReturnValue",
+                "source_mapping": {
+                  "start": 59,
+                  "length": 297,
+                  "filename_relative": "contracts/returnvalue.sol",
+                  "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+                  "filename_short": "contracts/returnvalue.sol",
+                  "is_dependency": false,
+                  "lines": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "callnotchecked()"
+            }
+          },
+          {
+            "type": "node",
+            "name": "callee.call()",
+            "source_mapping": {
+              "start": 202,
+              "length": 15,
+              "filename_relative": "contracts/returnvalue.sol",
+              "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+              "filename_short": "contracts/returnvalue.sol",
+              "is_dependency": false,
+              "lines": [8],
+              "starting_column": 9,
+              "ending_column": 24
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "callnotchecked",
+                "source_mapping": {
+                  "start": 159,
+                  "length": 65,
+                  "filename_relative": "contracts/returnvalue.sol",
+                  "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+                  "filename_short": "contracts/returnvalue.sol",
+                  "is_dependency": false,
+                  "lines": [7, 8, 9],
+                  "starting_column": 5,
+                  "ending_column": 6
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "ReturnValue",
+                    "source_mapping": {
+                      "start": 59,
+                      "length": 297,
+                      "filename_relative": "contracts/returnvalue.sol",
+                      "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+                      "filename_short": "contracts/returnvalue.sol",
+                      "is_dependency": false,
+                      "lines": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                      "starting_column": 1,
+                      "ending_column": 2
+                    }
+                  },
+                  "signature": "callnotchecked()"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Low level call in ReturnValue.callnotchecked() (contracts/returnvalue.sol#7-9):\n\t- callee.call() (contracts/returnvalue.sol#8)\n",
+        "markdown": "Low level call in [ReturnValue.callnotchecked()](contracts/returnvalue.sol#L7-L9):\n\t- [callee.call()](contracts/returnvalue.sol#L8)\n",
+        "first_markdown_element": "contracts/returnvalue.sol#L7-L9",
+        "id": "f2196c00b57203db420d1135dfca371572753674b3ea57ce7fafc4cf7d95d1db",
+        "check": "low-level-calls",
+        "impact": "Informational",
+        "confidence": "High"
+      },
+      {
+        "elements": [
+          {
+            "type": "variable",
+            "name": "callee",
+            "source_mapping": {
+              "start": 86,
+              "length": 66,
+              "filename_relative": "contracts/returnvalue.sol",
+              "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+              "filename_short": "contracts/returnvalue.sol",
+              "is_dependency": false,
+              "lines": [5],
+              "starting_column": 5,
+              "ending_column": 71
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "ReturnValue",
+                "source_mapping": {
+                  "start": 59,
+                  "length": 297,
+                  "filename_relative": "contracts/returnvalue.sol",
+                  "filename_absolute": "/Users/rafaelf/projects/detector-contract/contracts/returnvalue.sol",
+                  "filename_short": "contracts/returnvalue.sol",
+                  "is_dependency": false,
+                  "lines": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              }
+            }
+          }
+        ],
+        "description": "ReturnValue.callee (contracts/returnvalue.sol#5) should be constant \n",
+        "markdown": "[ReturnValue.callee](contracts/returnvalue.sol#L5) should be constant \n",
+        "first_markdown_element": "contracts/returnvalue.sol#L5",
+        "id": "401ccb498c31a98b5bb65e16b97850e811fe9b520d25b58176719c58c66d8924",
+        "check": "constable-states",
+        "impact": "Optimization",
+        "confidence": "High"
+      }
+    ]
+  }
+}

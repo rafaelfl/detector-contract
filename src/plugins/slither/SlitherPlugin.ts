@@ -5,6 +5,7 @@ import { SlitherCommandOutput } from './types';
 import { ResultDetection } from '../types/ResultDetection';
 
 const MAP_VULNERABILITY = {
+  'unchecked-lowlevel': Vulnerabilities.UNCHECKED_RETURN,
   suicidal: Vulnerabilities.SELF_DESTRUCT,
 };
 

@@ -41,6 +41,19 @@ const detectors = {
       falsePositiveRate: 0.38,
     },
   },
+
+  // SWC-106 - Unprotected SELFDESTRUCT Instruction
+  uncheckedReturn: {
+    [Detectors.SLITHER]: {
+      truePositiveRate: 0.9,
+      falsePositiveRate: 0.1,
+    },
+
+    [Detectors.MYTHRIL]: {
+      truePositiveRate: 0.9,
+      falsePositiveRate: 0.15,
+    },
+  },
 };
 
 const main = async () => {
@@ -55,7 +68,7 @@ const main = async () => {
 
   const detectorScheduler = new DetectorScheduler(new SimplePluginPolicy(pluginsList), DEBUG_MODE);
 
-  const result = await detectorScheduler.execute('./contracts/killbilly.sol');
+  const result = await detectorScheduler.execute('./contracts/returnvalue.sol');
 
   const confidenceResolver: IConfidenceResolver = new FuzzyConfidenceResolver();
 
@@ -71,22 +84,23 @@ const main = async () => {
       continue;
     }
 
-    const vulnerabilityType = detectResult.results[0].vulnerabilityType;
+    const vulnerabilityType = detectResult.results[0]?.vulnerabilityType ?? Vulnerabilities.OTHER;
 
     const tpr = detectors[vulnerabilityType]?.[res.detectorName].truePositiveRate ?? 0.0;
     const fpr = detectors[vulnerabilityType]?.[res.detectorName].falsePositiveRate ?? 0.0;
 
     const confidence = confidenceResolver.calculateConfidence(tpr, fpr);
-
     detectResult.confidence = confidence;
 
-    // console.log(` ---------------------------------------`);
-    // console.log(` ::::: detector: ${res.detectorName}`);
-    // console.log(` ::::: tpr: ${tpr}`);
-    // console.log(` ::::: fpr: ${fpr}`);
-    // console.log(` ::::: result: ${res.json}`);
-    // console.log(` ::::: confidence: ${confidence}`);
-    // console.log(` ---------------------------------------`);
+    if (DEBUG_MODE) {
+      console.log(` ---------------------------------------`);
+      console.log(` ::::: detector: ${res.detectorName}`);
+      console.log(` ::::: tpr: ${tpr}`);
+      console.log(` ::::: fpr: ${fpr}`);
+      console.log(` ::::: result: ${JSON.stringify(detectResult)}`);
+      console.log(` ::::: confidence: ${confidence}`);
+      console.log(` ---------------------------------------`);
+    }
 
     // add to the detected array
 
@@ -94,17 +108,26 @@ const main = async () => {
       detectedVulnerabilities[vulnerabilityType] = [];
     }
 
-    detectedVulnerabilities[vulnerabilityType].push(detectResult);
-  }
-
-  for (const v in Vulnerabilities) {
-    if (detectedVulnerabilities[v]) {
-      detectedVulnerabilities[v].sort((a, b) => a.confidence - b.confidence);
+    if (detectResult.results?.length) {
+      detectedVulnerabilities[vulnerabilityType].push(detectResult);
     }
   }
 
-  console.log(' .>>> detectedVulnerability');
-  console.log(JSON.stringify(detectedVulnerabilities));
+  const response: { vulnerabilities: Array<ResultDetection> } = {
+    vulnerabilities: [],
+  };
+
+  for (const v in Vulnerabilities) {
+    const vt = Vulnerabilities[v];
+
+    if (detectedVulnerabilities[vt]) {
+      detectedVulnerabilities[vt].sort((a, b) => b.confidence - a.confidence);
+
+      response.vulnerabilities.push(detectedVulnerabilities[vt][0]);
+    }
+  }
+
+  console.log(JSON.stringify(response));
 };
 
 main();

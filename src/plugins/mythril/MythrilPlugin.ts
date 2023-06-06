@@ -6,6 +6,7 @@ import { MythrilCommandOutput } from './types';
 import { ResultDetection } from '../types/ResultDetection';
 
 const MAP_VULNERABILITY = {
+  '104': Vulnerabilities.UNCHECKED_RETURN,
   '106': Vulnerabilities.SELF_DESTRUCT,
 };
 

@@ -1,5 +1,6 @@
 export const Vulnerabilities = {
   SELF_DESTRUCT: 'selfDestruct',
+  UNCHECKED_RETURN: 'uncheckedReturn',
   OTHER: 'other',
 } as const;
 
