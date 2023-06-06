@@ -52,7 +52,6 @@ export class SlitherPlugin extends DetectorPlugin {
             name: e.name,
             description: d.description,
             lines: e?.source_mapping?.lines ?? [],
-            sourceFile: e?.source_mapping?.filename_relative ?? '',
             sourceMap: {
               start: e?.source_mapping?.start ?? 0,
               length: e?.source_mapping?.length ?? 0,

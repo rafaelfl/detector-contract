@@ -8,7 +8,6 @@ export interface ResultDetection {
     name: string;
     description: string;
     lines: Array<number>;
-    sourceFile: string;
     sourceMap: {
       start: number;
       length: number;

@@ -4,16 +4,9 @@ import { Error } from './exception';
 
 const { APP_SERVER_ERROR } = messages;
 
-interface DataObject {
-  [key: string]: string | number | boolean | DataObject | DataObject[] | undefined | null;
-}
-
 export default class ResponseHelper {
-  static send(res: Response, data: DataObject, code = 200) {
-    return res.status(code).json({
-      success: true,
-      data,
-    });
+  static send(res: Response, data: unknown, code = 200) {
+    return res.status(code).json(data);
   }
 
   /*

@@ -1,11 +1,10 @@
 import { Router } from 'express';
-import ResponseHelper from '../../helpers/responseHelper';
+
+import controller from '../../controllers/scan/ScanController';
 
 const router = Router();
 
-/* POST create user account. */
-router.post('/scan', (req, res) => {
-  return ResponseHelper.send(res, { test: 1 });
-});
+/* POST scan filename */
+router.post('/scan', controller.scan());
 
 export default router;

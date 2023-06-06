@@ -62,7 +62,6 @@ export class MythrilPlugin extends DetectorPlugin {
           name: issue.title,
           description: issue.description,
           lines: [issue.lineno],
-          sourceFile: issue.filename,
           sourceMap: {
             start: sourceMapStart,
             length: sourceMapLength,
