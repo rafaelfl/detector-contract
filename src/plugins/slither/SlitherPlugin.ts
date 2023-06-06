@@ -34,6 +34,7 @@ export class SlitherPlugin extends DetectorPlugin {
         success: true,
         error: null,
         results: [],
+        confidence: 0,
       };
 
       for (const d of detectors) {

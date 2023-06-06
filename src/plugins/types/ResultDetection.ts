@@ -15,4 +15,5 @@ export interface ResultDetection {
     };
     severity: string;
   }>;
+  confidence: number;
 }

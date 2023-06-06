@@ -7,7 +7,8 @@ import { DetectorScheduler } from './plugins/scheduler/DetectorScheduler';
 import { SimplePluginPolicy } from './plugins/scheduler/policies/SimplePluginPolicy';
 import { SlitherPlugin } from './plugins/slither/SlitherPlugin';
 import { MythrilPlugin } from './plugins/mythril/MythrilPlugin';
-import { Detectors } from './plugins/constants';
+import { Detectors, Vulnerabilities } from './plugins/constants';
+import { vulnerabilitiesAffectSameLines } from './utils';
 
 const detectors = {
   // SWC-106 - Unprotected SELFDESTRUCT Instruction
@@ -59,8 +60,9 @@ const main = async () => {
 
   const confidenceResolver: IConfidenceResolver = new FuzzyConfidenceResolver();
 
-  let averageConfidence = 0.0,
-    confidenceCount = 0;
+  const detectedVulnerabilities: {
+    [vulnerabilityType: string]: Array<ResultDetection>;
+  } = {};
 
   for (const res of result) {
     const detectResult: ResultDetection = JSON.parse(res.json);
@@ -70,24 +72,40 @@ const main = async () => {
       continue;
     }
 
-    const tpr = detectors[detectResult.results[0].vulnerabilityType]?.[res.detectorName].truePositiveRate ?? 0.0;
-    const fpr = detectors[detectResult.results[0].vulnerabilityType]?.[res.detectorName].falsePositiveRate ?? 0.0;
+    const vulnerabilityType = detectResult.results[0].vulnerabilityType;
+
+    const tpr = detectors[vulnerabilityType]?.[res.detectorName].truePositiveRate ?? 0.0;
+    const fpr = detectors[vulnerabilityType]?.[res.detectorName].falsePositiveRate ?? 0.0;
 
     const confidence = confidenceResolver.calculateConfidence(tpr, fpr);
 
-    console.log(` ---------------------------------------`);
-    console.log(` ::::: detector: ${res.detectorName}`);
-    console.log(` ::::: tpr: ${tpr}`);
-    console.log(` ::::: fpr: ${fpr}`);
-    console.log(` ::::: result: ${res.json}`);
-    console.log(` ::::: confidence: ${confidence}`);
-    console.log(` ---------------------------------------`);
+    detectResult.confidence = confidence;
 
-    averageConfidence += confidence;
-    confidenceCount++;
+    // console.log(` ---------------------------------------`);
+    // console.log(` ::::: detector: ${res.detectorName}`);
+    // console.log(` ::::: tpr: ${tpr}`);
+    // console.log(` ::::: fpr: ${fpr}`);
+    // console.log(` ::::: result: ${res.json}`);
+    // console.log(` ::::: confidence: ${confidence}`);
+    // console.log(` ---------------------------------------`);
+
+    // add to the detected array
+
+    if (!detectedVulnerabilities[vulnerabilityType]) {
+      detectedVulnerabilities[vulnerabilityType] = [];
+    }
+
+    detectedVulnerabilities[vulnerabilityType].push(detectResult);
   }
 
-  console.log(`\n :::: Average confidence ${averageConfidence / confidenceCount}`);
+  for (const v in Vulnerabilities) {
+    if (detectedVulnerabilities[v]) {
+      detectedVulnerabilities[v].sort((a, b) => a.confidence - b.confidence);
+    }
+  }
+
+  console.log(' .>>> detectedVulnerability');
+  console.log(JSON.stringify(detectedVulnerabilities));
 };
 
 main();

@@ -22,8 +22,6 @@ export class MythrilPlugin extends DetectorPlugin {
         throw new Error('Empty output');
       }
 
-      console.log(' >>>>> output: ', output);
-
       // TODO: need to format the JSON following a standard output format
       const mythrilObj: MythrilCommandOutput = JSON.parse(output);
 
@@ -37,6 +35,7 @@ export class MythrilPlugin extends DetectorPlugin {
         success: true,
         error: null,
         results: [],
+        confidence: 0,
       };
 
       for (const issue of issues) {
