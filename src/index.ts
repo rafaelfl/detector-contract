@@ -8,7 +8,6 @@ import { SimplePluginPolicy } from './plugins/scheduler/policies/SimplePluginPol
 import { SlitherPlugin } from './plugins/slither/SlitherPlugin';
 import { MythrilPlugin } from './plugins/mythril/MythrilPlugin';
 import { Detectors, Vulnerabilities } from './plugins/constants';
-import { vulnerabilitiesAffectSameLines } from './utils';
 
 const detectors = {
   // SWC-106 - Unprotected SELFDESTRUCT Instruction
