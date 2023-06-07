@@ -15,7 +15,8 @@
    * [Project Description](#-project-description)
    * [Prerequisites](#-prerequisites)
    * [Installation](#-installation)
-   * [Technologies](#-technologies)
+   * [How to use](#-how-to-use)
+   * [TODO list](#-todo-list)
    * [Author](#-author)
 
 ---
@@ -101,7 +102,7 @@ Endpoints:
   - Body: `{ sourceCode: "smart contract source code" }`
 
 
-Some examples of API calls can be imported to [Postman](https://www.postman.com/) and are available [here](https://github.com/rafaelfl/detector-contract/blob/main/resources/POC Scanner.postman_collection.json).
+Some examples of API calls can be imported to [Postman](https://www.postman.com/) and are available [here](https://github.com/rafaelfl/detector-contract/blob/main/resources/POC%20Scanner.postman_collection.json).
 
 Examples using `curl`:
 
