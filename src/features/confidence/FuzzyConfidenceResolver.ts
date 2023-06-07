@@ -8,13 +8,9 @@ import {
 import { IConfidenceResolver } from './IConfidenceResolver';
 
 export class FuzzyConfidenceResolver implements IConfidenceResolver {
-  private readonly tprLow: FuzzySet;
-  private readonly tprMedium: FuzzySet;
-  private readonly tprHigh: FuzzySet;
-
-  private readonly fprLow: FuzzySet;
-  private readonly fprMedium: FuzzySet;
-  private readonly fprHigh: FuzzySet;
+  private readonly inputLow: FuzzySet;
+  private readonly inputMedium: FuzzySet;
+  private readonly inputHigh: FuzzySet;
 
   private readonly outputVeryLow: FuzzySet;
   private readonly outputLow: FuzzySet;
@@ -28,9 +24,9 @@ export class FuzzyConfidenceResolver implements IConfidenceResolver {
     ///////////////////////// membership functions
     // We start by creating our fuzzy sets (or membership functions) that will make up our variables
 
-    ///// TPR
-    this.tprLow = new FuzzySet('low');
-    this.tprLow.generateMembershipValues({
+    ///// input
+    this.inputLow = new FuzzySet('low');
+    this.inputLow.generateMembershipValues({
       type: MembershipFunctionType.Triangular,
       parameters: {
         left: 0,
@@ -42,8 +38,8 @@ export class FuzzyConfidenceResolver implements IConfidenceResolver {
       },
     });
 
-    this.tprMedium = new FuzzySet('medium');
-    this.tprMedium.generateMembershipValues({
+    this.inputMedium = new FuzzySet('medium');
+    this.inputMedium.generateMembershipValues({
       type: MembershipFunctionType.Triangular,
       parameters: {
         left: 0,
@@ -55,48 +51,8 @@ export class FuzzyConfidenceResolver implements IConfidenceResolver {
       },
     });
 
-    this.tprHigh = new FuzzySet('high');
-    this.tprHigh.generateMembershipValues({
-      type: MembershipFunctionType.Triangular,
-      parameters: {
-        left: 50,
-        center: 100,
-        right: 100,
-        minValue: 0,
-        maxValue: 100,
-        step: 1,
-      },
-    });
-
-    ///// FPR
-    this.fprHigh = new FuzzySet('high');
-    this.fprHigh.generateMembershipValues({
-      type: MembershipFunctionType.Triangular,
-      parameters: {
-        left: 0,
-        center: 0,
-        right: 50,
-        minValue: 0,
-        maxValue: 100,
-        step: 1,
-      },
-    });
-
-    this.fprMedium = new FuzzySet('medium');
-    this.fprMedium.generateMembershipValues({
-      type: MembershipFunctionType.Triangular,
-      parameters: {
-        left: 0,
-        center: 50,
-        right: 100,
-        minValue: 0,
-        maxValue: 100,
-        step: 1,
-      },
-    });
-
-    this.fprLow = new FuzzySet('low');
-    this.fprLow.generateMembershipValues({
+    this.inputHigh = new FuzzySet('high');
+    this.inputHigh.generateMembershipValues({
       type: MembershipFunctionType.Triangular,
       parameters: {
         left: 50,
@@ -178,9 +134,15 @@ export class FuzzyConfidenceResolver implements IConfidenceResolver {
     //////////////////////////////////////////////
 
     // Then, we tie these fuzzy sets to variables
-    const tprVariable = new LinguisticVariable('tpr').addSet(this.tprLow).addSet(this.tprMedium).addSet(this.tprHigh);
+    const tprVariable = new LinguisticVariable('tpr')
+      .addSet(this.inputLow)
+      .addSet(this.inputMedium)
+      .addSet(this.inputHigh);
 
-    const fprVariable = new LinguisticVariable('fpr').addSet(this.fprLow).addSet(this.fprMedium).addSet(this.fprHigh);
+    const fprVariable = new LinguisticVariable('fpr')
+      .addSet(this.inputLow)
+      .addSet(this.inputMedium)
+      .addSet(this.inputHigh);
 
     const confidenceVariable = new LinguisticVariable('confidence')
       .addSet(this.outputVeryLow)
@@ -215,7 +177,7 @@ export class FuzzyConfidenceResolver implements IConfidenceResolver {
     const normTpr = Math.trunc(tpr * 100);
     const normFpr = Math.trunc(fpr * 100);
 
-    const result = this.fis.solve('Mamdani', { tpr: normTpr, fpr: 100 - normFpr }, DefuzzicationType.MeanOfMaxima);
+    const result = this.fis.solve('Mamdani', { tpr: normTpr, fpr: normFpr }, DefuzzicationType.MeanOfMaxima);
 
     return result / 100.0;
   }
