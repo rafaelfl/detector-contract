@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { SlitherPlugin } from '../../features/plugins/slither/SlitherPlugin';
 import { MythrilPlugin } from '../../features/plugins/mythril/MythrilPlugin';
-import { DetectorScheduler } from '../../features/plugins/scheduler/DetectorScheduler';
-import { SimplePluginPolicy } from '../../features/plugins/scheduler/policies/SimplePluginPolicy';
 import { Detectors, Vulnerabilities } from '../../features/plugins/constants';
 import { FuzzyConfidenceResolver, IConfidenceResolver } from '../../features/confidence';
-import { ResultDetection } from '../../features/plugins/types/ResultDetection';
+import { ResultDetection } from '../../types/ResultDetection';
+import { DetectorScheduler } from '../../features/scheduler/DetectorScheduler';
+import { SimplePluginPolicy } from '../../features/scheduler/policies/SimplePluginPolicy';
 
 const detectors = {
   // SWC-106 - Unprotected SELFDESTRUCT Instruction

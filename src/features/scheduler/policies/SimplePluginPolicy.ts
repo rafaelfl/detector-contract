@@ -1,5 +1,5 @@
-import { DetectorPlugin } from '../../DetectorPlugin';
 import { IPolicyPlugin } from './IPolicyPlugin';
+import { DetectorPlugin } from '../../plugins/DetectorPlugin';
 
 export class SimplePluginPolicy extends IPolicyPlugin {
   pluginsList: Array<DetectorPlugin>;

@@ -1,4 +1,4 @@
-import { IRunner } from './runner/IRunner';
+import { IRunner } from '../runner/IRunner';
 
 export abstract class DetectorPlugin {
   protected readonly runner: IRunner;

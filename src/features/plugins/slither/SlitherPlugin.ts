@@ -1,8 +1,8 @@
 import { DetectorPlugin } from '../DetectorPlugin';
-import { CommandRunner } from '../runner/CommandRunner';
+import { CommandRunner } from '../../runner/CommandRunner';
 import { Detectors, Vulnerabilities } from '../constants';
 import { SlitherCommandOutput } from './types';
-import { ResultDetection } from '../types/ResultDetection';
+import { ResultDetection } from '../../../types/ResultDetection';
 
 const MAP_VULNERABILITY = {
   'unchecked-lowlevel': Vulnerabilities.UNCHECKED_RETURN,

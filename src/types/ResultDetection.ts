@@ -1,4 +1,4 @@
-import { VulnerabilityType } from '../constants';
+import { VulnerabilityType } from '../features/plugins/constants';
 
 export interface ResultDetection {
   readonly success: boolean;

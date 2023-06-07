@@ -1,9 +1,9 @@
 import { DetectorPlugin } from '../DetectorPlugin';
-import { CommandRunner } from '../runner/CommandRunner';
+import { CommandRunner } from '../../runner/CommandRunner';
 import { Detectors, Vulnerabilities } from '../constants';
 
 import { MythrilCommandOutput } from './types';
-import { ResultDetection } from '../types/ResultDetection';
+import { ResultDetection } from '../../../types/ResultDetection';
 
 const MAP_VULNERABILITY = {
   '104': Vulnerabilities.UNCHECKED_RETURN,
