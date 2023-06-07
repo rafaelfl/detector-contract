@@ -5,6 +5,8 @@ import { Detectors, Vulnerabilities } from '../constants';
 import { MythrilCommandOutput } from './types';
 import { ResultDetection } from '../../../types/ResultDetection';
 
+// unique map that grabs the default vulnerability type based on
+// the specific tool name
 const MAP_VULNERABILITY = {
   '104': Vulnerabilities.UNCHECKED_RETURN,
   '106': Vulnerabilities.SELF_DESTRUCT,
@@ -23,7 +25,6 @@ export class MythrilPlugin extends DetectorPlugin {
         throw new Error('Empty output');
       }
 
-      // TODO: need to format the JSON following a standard output format
       const mythrilObj: MythrilCommandOutput = JSON.parse(output);
 
       if (!mythrilObj.success) {

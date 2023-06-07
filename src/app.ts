@@ -8,6 +8,7 @@ import { messages } from './helpers/constants';
 const app = express();
 const { NOT_FOUND } = messages;
 
+// TODO: Let's avoid any CORS issue for now ;)
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');

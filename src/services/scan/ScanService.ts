@@ -67,6 +67,7 @@ class ScanService {
 
     const detectorScheduler = new DetectorScheduler(new SimplePluginPolicy(pluginsList), DEBUG_MODE);
 
+    // TODO: the plugin tools must be customized to allow in-memory processing. Current version
     const result = await detectorScheduler.execute(filename);
 
     const confidenceResolver: IConfidenceResolver = new FuzzyConfidenceResolver();
@@ -134,6 +135,8 @@ class ScanService {
 
     const sourceCode = object.sourceCode;
 
+    // TODO: the plugin tools must be customized to allow in-memory processing. Since it's
+    // just a POC, current version saves the files into the FS and process them
     const filename = `./tmp/${uuid}.sol`;
 
     fs.mkdirSync('./tmp', { recursive: true });

@@ -4,7 +4,7 @@ import controller from '../../controllers/suggestion/SuggestionController';
 
 const router = Router();
 
-/* POST scan filename */
+/* POST suggestion */
 router.post('/suggestion', controller.suggestion());
 
 export default router;

@@ -1,0 +1,82 @@
+{
+  "info": {
+    "_postman_id": "f0da0d87-bca4-4144-8689-4b7413fb3cb0",
+    "name": "POC Scanner",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "8682347"
+  },
+  "item": [
+    {
+      "name": "Scan killbilly.sol",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"sourceCode\": \"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.18;\\n\\ncontract KillBilly {\\n\\tbool public is_killable;\\n\\tmapping (address => bool) public approved_killers;\\n\\n\\tconstructor() public {\\n\\t\\tis_killable = false;\\n\\t}\\n\\n\\tfunction killerize(address addr) public {\\n\\t\\tapproved_killers[addr] = true;\\n\\t}\\n\\n\\tfunction activatekillability() public {\\n\\t\\trequire(approved_killers[msg.sender] == true);\\n\\t\\tis_killable = true;\\n\\t}\\n\\n\\tfunction commencekilling() public {\\n\\t    require(is_killable);\\n\\n        // cast address to payable\\n        address payable addr = payable(msg.sender);\\n\\n\\t \\tselfdestruct(addr);\\n\\t}\\n}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/api/v1/scan"
+      },
+      "response": []
+    },
+    {
+      "name": "Suggestions killbilly.sol",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"sourceCode\": \"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.18;\\n\\ncontract KillBilly {\\n\\tbool public is_killable;\\n\\tmapping (address => bool) public approved_killers;\\n\\n\\tconstructor() public {\\n\\t\\tis_killable = false;\\n\\t}\\n\\n\\tfunction killerize(address addr) public {\\n\\t\\tapproved_killers[addr] = true;\\n\\t}\\n\\n\\tfunction activatekillability() public {\\n\\t\\trequire(approved_killers[msg.sender] == true);\\n\\t\\tis_killable = true;\\n\\t}\\n\\n\\tfunction commencekilling() public {\\n\\t    require(is_killable);\\n\\n        // cast address to payable\\n        address payable addr = payable(msg.sender);\\n\\n\\t \\tselfdestruct(addr);\\n\\t}\\n}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/api/v1/suggestion"
+      },
+      "response": []
+    },
+    {
+      "name": "Scan returnvalue.sol",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"sourceCode\": \"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.18;\\n\\ncontract ReturnValue {\\n    address public callee = 0xE0f7e56E62b4267062172495D7506087205A4229;\\n\\n    function callnotchecked() public {\\n        callee.call(\\\"\\\");\\n    }\\n\\n    function callchecked() public {\\n        (bool success, bytes memory data) = callee.call(\\\"\\\");\\n        require(success);\\n    }\\n}\\n\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/api/v1/scan"
+      },
+      "response": []
+    },
+    {
+      "name": "Suggestions returnvalue.sol",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"sourceCode\": \"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.18;\\n\\ncontract ReturnValue {\\n    address public callee = 0xE0f7e56E62b4267062172495D7506087205A4229;\\n\\n    function callnotchecked() public {\\n        callee.call(\\\"\\\");\\n    }\\n\\n    function callchecked() public {\\n        (bool success, bytes memory data) = callee.call(\\\"\\\");\\n        require(success);\\n    }\\n}\\n\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/api/v1/suggestion"
+      },
+      "response": []
+    }
+  ]
+}

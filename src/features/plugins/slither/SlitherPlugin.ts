@@ -4,6 +4,8 @@ import { Detectors, Vulnerabilities } from '../constants';
 import { SlitherCommandOutput } from './types';
 import { ResultDetection } from '../../../types/ResultDetection';
 
+// unique map that grabs the default vulnerability type based on
+// the specific tool name
 const MAP_VULNERABILITY = {
   'unchecked-lowlevel': Vulnerabilities.UNCHECKED_RETURN,
   suicidal: Vulnerabilities.SELF_DESTRUCT,
@@ -22,7 +24,6 @@ export class SlitherPlugin extends DetectorPlugin {
         throw new Error('Empty output');
       }
 
-      // TODO: need to format the JSON following a standard output format
       const slitherObj: SlitherCommandOutput = JSON.parse(output);
 
       if (!slitherObj.success) {

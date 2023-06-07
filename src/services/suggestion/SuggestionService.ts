@@ -24,6 +24,9 @@ class SuggestionService {
         }),
       });
 
+      // TODO: create the specific response type for the OpenAI API. For the POC,
+      // any is enough
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const data = (await response.json()) as any;
 
@@ -39,7 +42,7 @@ class SuggestionService {
       return { suggestion: details };
     } catch (err) {
       console.log(err);
-      throw createError(500, messages.OPENAI_SERVER_ERROR);
+      throw createError(503, messages.OPENAI_SERVER_ERROR);
     }
   }
 }
