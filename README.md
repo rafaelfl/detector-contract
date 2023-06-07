@@ -4,7 +4,7 @@
 
 ## About
 
-<p align="center">Project which allows to search for vulnerabilities in Smart Contracts</p>
+<p align="center">Project that allows to search for vulnerabilities in Smart Contracts</p>
 
 
 ## Table of Contents
