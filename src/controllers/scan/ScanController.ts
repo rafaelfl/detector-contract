@@ -1,12 +1,7 @@
-import { BaseService } from '../../services/BaseService';
 import ScanService from '../../services/scan/ScanService';
 import BaseController from '../BaseController';
 
 class ScanController extends BaseController {
-  constructor(service: BaseService) {
-    super(service);
-  }
-
   scan() {
     return this.asyncWrapper(async (req, res) => {
       const payload = await ScanService.getResult({
@@ -18,5 +13,5 @@ class ScanController extends BaseController {
   }
 }
 
-const controller = new ScanController(ScanService);
+const controller = new ScanController();
 export default controller;

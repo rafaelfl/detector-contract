@@ -15,6 +15,7 @@ interface ErrnoException extends Error {
 }
 
 dotenv.config();
+dotenv.config({ path: '.env.local' });
 
 /**
  * Get port from environment and store in Express.

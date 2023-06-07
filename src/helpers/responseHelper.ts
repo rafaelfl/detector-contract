@@ -13,12 +13,13 @@ export default class ResponseHelper {
    * Send http error response
    */
   static sendError(res: Response, error: Error) {
-    const { statusCode = 500, message: errorMessage } = error;
+    const { statusCode = 500, message: errorMessage, errors } = error;
     const message = statusCode === 500 ? APP_SERVER_ERROR : errorMessage;
 
     return res.status(statusCode).json({
       success: false,
       message,
+      errors,
     });
   }
 }
