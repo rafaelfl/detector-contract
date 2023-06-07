@@ -1,13 +1,13 @@
 import dotenv from 'dotenv';
 
-import { IConfidenceResolver, FuzzyConfidenceResolver } from './confidence';
+import { IConfidenceResolver, FuzzyConfidenceResolver } from './features/confidence';
 
-import { ResultDetection } from './plugins/types/ResultDetection';
-import { DetectorScheduler } from './plugins/scheduler/DetectorScheduler';
-import { SimplePluginPolicy } from './plugins/scheduler/policies/SimplePluginPolicy';
-import { SlitherPlugin } from './plugins/slither/SlitherPlugin';
-import { MythrilPlugin } from './plugins/mythril/MythrilPlugin';
-import { Detectors, Vulnerabilities } from './plugins/constants';
+import { ResultDetection } from './features/plugins/types/ResultDetection';
+import { DetectorScheduler } from './features/plugins/scheduler/DetectorScheduler';
+import { SimplePluginPolicy } from './features/plugins/scheduler/policies/SimplePluginPolicy';
+import { SlitherPlugin } from './features/plugins/slither/SlitherPlugin';
+import { MythrilPlugin } from './features/plugins/mythril/MythrilPlugin';
+import { Detectors, Vulnerabilities } from './features/plugins/constants';
 
 const detectors = {
   // SWC-106 - Unprotected SELFDESTRUCT Instruction

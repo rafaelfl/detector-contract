@@ -1,13 +1,13 @@
 import fs from 'fs';
 import { v4 as uuidv4 } from 'uuid';
 
-import { SlitherPlugin } from '../../plugins/slither/SlitherPlugin';
-import { MythrilPlugin } from '../../plugins/mythril/MythrilPlugin';
-import { DetectorScheduler } from '../../plugins/scheduler/DetectorScheduler';
-import { SimplePluginPolicy } from '../../plugins/scheduler/policies/SimplePluginPolicy';
-import { Detectors, Vulnerabilities } from '../../plugins/constants';
-import { FuzzyConfidenceResolver, IConfidenceResolver } from '../../confidence';
-import { ResultDetection } from '../../plugins/types/ResultDetection';
+import { SlitherPlugin } from '../../features/plugins/slither/SlitherPlugin';
+import { MythrilPlugin } from '../../features/plugins/mythril/MythrilPlugin';
+import { DetectorScheduler } from '../../features/plugins/scheduler/DetectorScheduler';
+import { SimplePluginPolicy } from '../../features/plugins/scheduler/policies/SimplePluginPolicy';
+import { Detectors, Vulnerabilities } from '../../features/plugins/constants';
+import { FuzzyConfidenceResolver, IConfidenceResolver } from '../../features/confidence';
+import { ResultDetection } from '../../features/plugins/types/ResultDetection';
 
 const detectors = {
   // SWC-106 - Unprotected SELFDESTRUCT Instruction
