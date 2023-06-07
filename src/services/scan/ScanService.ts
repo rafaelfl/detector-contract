@@ -136,6 +136,8 @@ class ScanService {
 
     const filename = `./tmp/${uuid}.sol`;
 
+    fs.mkdirSync('./tmp', { recursive: true });
+
     fs.writeFileSync(filename, sourceCode);
 
     const response = await ScanService.processDetectors(filename);
