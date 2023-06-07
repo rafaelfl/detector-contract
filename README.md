@@ -13,7 +13,7 @@
    * [About](#about)
    * [Table of Contents](#table-of-contents)
    * [Project Description](#-project-description)
-   * [Prerequisites](#-prerequisites)
+   * [Prerequisites](#prerequisites)
    * [Installation](#-installation)
    * [How to use](#-how-to-use)
    * [TODO list](#-todo-list)
@@ -26,8 +26,8 @@
 The project was developed to provide an API to search for vulnerabilities in smart contracts. It was developed with [Node.js](https://nodejs.org/) and [Express](https://expressjs.com/), using [Husky](https://typicode.github.io/husky/#/), [lint-staged](https://github.com/okonet/lint-staged), [eslint](https://eslint.org/), [prettier](https://prettier.io/) and [commitlint](https://commitlint.js.org/#/) with [conventional commits](conventionalcommits.org/).
 
 **Currently only two vulnerabilities are supported:**
- - Unchecked Call Return Value (SWC-104)
- - Unprotected SELFDESTRUCT Instruction (SWC-106)
+ - **Unchecked Call Return Value (SWC-104)**
+ - **Unprotected SELFDESTRUCT Instruction (SWC-106)**
 
 ---
 
