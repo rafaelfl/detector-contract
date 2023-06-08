@@ -92,7 +92,7 @@ Furthermore, the Husky is configured to verify commit messages incompatible with
 
 ## 🎉 How to use
 
-After having the service running, you can access it through the following endpoints (Swagger pending):
+After having the service running, you can access it through the following endpoints ([Swagger](https://swagger.io/) documentation page can be accessed through the browser using http://localhost:3000/api-docs):
 
 Endpoints:
 - POST `http://localhost:3000/api/v1/scan`
@@ -146,9 +146,9 @@ curl --location 'http://localhost:3000/api/v1/suggestion' \
 
 ## 🛠 TODO list
 
+- [X] Document the API with Swagger
 - [ ] Create a docker container for running the service with zero setup
 - [ ] Unit tests
-- [ ] Document the API with Swagger
 - [ ] Customize plugins source code to allow in-memory operations, avoiding the service to save the files before processing it
 
 ---

@@ -1,0 +1,180 @@
+openapi: 3.0.0
+
+info:
+  title: Detector contract API
+  description: API that allows to search for vulnerabilities in Smart Contracts
+  version: "1.0.0"
+  contact:
+    name: Rafael Fernandes Lopes
+    email: rafael.fernandes@gmail.com
+
+servers:
+  - url: http://localhost:{port}/{basePath}
+    description: Local development server
+    variables:
+      port:
+        default: "3000"
+
+      basePath: 
+        default: "api/v1"
+
+paths:
+  /scan:
+    post:
+      summary: Scanning route
+      description: >
+        This endpoint allows to scan a smart contract source code through different AST (analysis security testing)
+        tools, identifying potential vulnerabilities that could exist in the code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceCode'
+
+      responses:
+        '200':
+          description: Return information about potential vulnerabilities found in the smart contract sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vulnerabilities'
+
+        '500':
+          description: Return a server error status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Oops, something went wrong!"
+
+  /suggestion:
+    post:
+      summary: Suggestion route
+      description: >
+        This endpoint allows to use OpenAI engine to look for security improvements in the smart contract code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceCode'
+
+      responses:
+        '200':
+          description: Return suggestions about potential security improvements to be applied to
+            the smart contract sent. Powered by OpenAI
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Suggestions'
+
+        '500':
+          description: Return a server error status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Oops, something went wrong!"
+
+components:
+  schemas:
+    SourceCode:
+      type: object
+      required:
+        - sourceCode
+      properties:
+        sourceCode:
+          type: string
+          example: "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.18;\n\ncontract KillBilly {\n\tbool public is_killable;\n\tmapping (address => bool) public approved_killers;\n\n\tconstructor() public {\n\t\tis_killable = false;\n\t}\n\n\tfunction killerize(address addr) public {\n\t\tapproved_killers[addr] = true;\n\t}\n\n\tfunction activatekillability() public {\n\t\trequire(approved_killers[msg.sender] == true);\n\t\tis_killable = true;\n\t}\n\n\tfunction commencekilling() public {\n\t    require(is_killable);\n\n        // cast address to payable\n        address payable addr = payable(msg.sender);\n\n\t \tselfdestruct(addr);\n\t}\n}"
+
+    Vulnerabilities:
+      type: object
+      required:
+        - vulnerabilities
+      properties:
+        vulnerabilities:
+          type: array
+          items:
+              $ref: '#/components/schemas/Vulnerability'
+
+    Vulnerability:
+      type: object
+      required:
+        - success
+        - error
+        - results
+        - confidence
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+          nullable: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityResults'
+        confidence:
+          type: number
+          example: 0.75
+
+    VulnerabilityResults:
+      type: object
+      required:
+        - vulnerabilityType
+        - name
+        - description
+        - lines
+        - sourceMap
+        - severity
+      properties:
+        vulnerabilityType:
+          type: string
+          enum: [selfDestruct, uncheckedReturn]  
+        name:
+          type: string
+          example: Vulnerability name
+        description:
+          type: string
+          example: Detailed vulnerability description
+        lines:
+          type: array
+          items:
+            type: integer
+            example: [21, 22, 23]
+        sourceMap:
+          type: object
+          properties:
+            start:
+              type: integer
+              example: 407
+            length:
+              type: integer
+              example: 177
+        severity:
+          type: string
+          enum: [Low, Medium, High]
+
+    Suggestions:
+      type: object
+      required:
+        - suggestion
+      properties:
+        suggestion:
+          type: array
+          items:
+            type: string
+            example: ["No access control for the \"killerize\" function (line 13)", "No access control for the \"activatekillability\" function (line 17)", "No input validation for \"addr\" parameter in the \"commencekilling\" function (line 23)", "Lack of check for zero value in \"commencekilling\" function (line 23)", "No event emitted indicating contract has been self-destructed (line 26)"]
