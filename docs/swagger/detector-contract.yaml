@@ -75,7 +75,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Suggestions'
 
-        '500':
+        '503':
           description: Return a server error status
           content:
             application/json:
@@ -87,7 +87,7 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: "Oops, something went wrong!"
+                    example: "Error accessing OpenAI API"
 
 components:
   schemas:
