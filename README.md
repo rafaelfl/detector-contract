@@ -92,7 +92,7 @@ Furthermore, the Husky is configured to verify commit messages incompatible with
 
 ## 🎉 How to use
 
-After having the service running, you can access it through the following endpoints ([Swagger](https://swagger.io/) documentation page can be accessed through the browser using http://localhost:3000/api-docs):
+After having the service running, you can access it through the following endpoints ([Swagger](https://swagger.io/) documentation page can be accessed through this link: http://localhost:3000/api-docs):
 
 Endpoints:
 - POST `http://localhost:3000/api/v1/scan`
