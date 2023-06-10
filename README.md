@@ -88,6 +88,17 @@ Some other interesting commands:
 
 Furthermore, the Husky is configured to verify commit messages incompatible with the "Conventional Commits" standard, as well as to run the linter and prettier in the code.
 
+### 🐟 Docker container
+
+To run the code directly on a Docker container (avoiding to install **Slither** and **Mythril** in your local system), you can build and run the current image using the `docker-compose` command.
+
+```bash
+# Build and run the current Docker image
+$ docker-compose up -d
+```
+
+Running this command in the project directory begins the installation of all dependencies, builds the image and runs the container.
+
 ---
 
 ## 🎉 How to use
@@ -147,7 +158,7 @@ curl --location 'http://localhost:3000/api/v1/suggestion' \
 ## 🛠 TODO list
 
 - [X] Document the API with Swagger
-- [ ] Create a docker container for running the service with zero setup
+- [X] Create a docker container for running the service with zero setup
 - [ ] Unit tests
 - [ ] Customize plugins source code to allow in-memory operations, avoiding the service to save the files before processing it
 

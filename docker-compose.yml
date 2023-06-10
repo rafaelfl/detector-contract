@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  detector-service:
+    platform: linux/x86_64
+    build: .
+    environment:
+      port: 3000
+    ports:
+      - "3000:3000"
