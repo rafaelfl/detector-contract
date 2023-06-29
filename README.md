@@ -1,4 +1,4 @@
-# Detector Contract
+# Web3 Security Contract Detector
 
 ![Licença](https://img.shields.io/badge/license-MIT-brightgreen)
 
