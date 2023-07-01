@@ -38,7 +38,7 @@ Before starting, you need [Node.js](https://nodejs.org/en/), [Yarn](https://yarn
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/rafaelfl/detector-contract
+$ git clone https://github.com/rafaelfl/web3-security-contract-detector
 
 # Enter in the project folder in terminal/cmd
 $ cd detector-contract
